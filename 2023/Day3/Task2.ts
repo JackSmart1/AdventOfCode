@@ -44,7 +44,7 @@ const day3Task2 = (input) => {
   });
   const regex = /[*]/;
   splitSchematic
-  splitSchematic.forEach((element) => {
+  splitSchematic.forEach((element, i) => {
     let secondRowAbove = splitSchematic.find((s) => s.index === element.index - 2);
     let rowAbove = splitSchematic.find((s) => s.index === element.index - 1);
     let rowBelow = splitSchematic.find((s) => s.index === element.index + 1);
@@ -63,17 +63,27 @@ const day3Task2 = (input) => {
           numbersAndOnechar.match(regex) && element.schmatic.charAt(partNumber.indexOfFirst + partNumber.number.length).match(regex) && element.schmatic.charAt(partNumber.indexOfFirst + partNumber.number.length + 1).match(/\d/)
         ) {
           total += (Number(partNumber.number) * Number(element.partNumbers[index+1].number));
+          console.log(`${partNumber.number} * ${element.partNumbers[index+1].number}`)
         }
+        if(rowBelow?.schmatic.match(regex)){
+          console.log(rowBelow?.schmatic.indexOf('*'), rowBelow?.schmatic)
 
+        }
         if(rowBelow?.schmatic.match(regex) && rowBelow?.schmatic.indexOf('*') >= partNumber.indexOfFirst - 1 && rowBelow?.schmatic.indexOf('*') <= partNumber.indexOfFirst + partNumber.number.length + 1 ){
           secondRowBelow.partNumbers.forEach(pn => {
             pn
             console.log(rowBelow?.schmatic.indexOf('*'))
-          if(rowBelow?.schmatic.indexOf('*') - 1 >= pn.indexOfFirst && pn.number.length <= rowBelow?.schmatic.indexOf('*') +1){
+            rowBelow
+            let te = rowBelow?.schmatic.indexOf('*')
+            te
+          if(rowBelow?.schmatic.indexOf('*') >= pn.indexOfFirst -1 && rowBelow?.schmatic.indexOf('*') <= pn.indexOfFirst + pn.number.length +1){
             console.log(partNumber.number)
             pn
             element.schmatic.replace('*', 'F')
-            splitSchematic[element.index + 1].schmatic = splitSchematic[element.index + 1].schmatic.replace('*', 'F')
+            console.log(splitSchematic[i + 1].schmatic)
+            splitSchematic[i + 1].schmatic = splitSchematic[i + 1].schmatic.replace('*', 'F')
+            console.log(splitSchematic[i + 1].schmatic)
+            console.log(`${partNumber.number} * ${pn?.number}`)
             total += (Number(partNumber.number) * Number(pn?.number));
           }
         })
@@ -83,27 +93,27 @@ const day3Task2 = (input) => {
       });
     }
   });
-
+  console.log(splitSchematic)
   total;
   return total;
 };
+//Part 2: 6756
 
-// const schematic2 = `
-// 12.......*..
-// +.........34
-// .......-12..
-// ..78........
-// ..*....60...
-// 78..........
-// .......23...
-// ....90*12...
-// ............
-// 2.2......12.
-// .*.........*
-// 1.1.......56
-// `
+const schematic2 = `12.......*..
++.........34
+.......-12..
+..78........
+..*....60...
+78.........9
+.5.....23..$
+8...90*12...
+............
+2.2......12.
+.*.........*
+1.1..503+.56
+`
 
-const schematic2 = `.242......276....234............682.......................958..695..742................714......574..............833.........159....297.686.
+const schematic3 = `.242......276....234............682.......................958..695..742................714......574..............833.........159....297.686.
 .............*............................612*......304..*..........*.......@175...#...*...........*890...........*.............*..*........
 ..........346......................997........923......*..253..........698........122.746.....-832..........766.432..229.....674....415.....
 ...............#76...........332....*...............111...........785..............................=..720..*........*.......................
