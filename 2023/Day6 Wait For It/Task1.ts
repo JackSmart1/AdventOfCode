@@ -5,7 +5,6 @@ const day6 = () => {
     distance: number;
     waysToWin: number;
   }
-
   const task1Input = `Time:        53     89     76     98
   Distance:   313   1090   1214   1201`;
 
@@ -41,7 +40,6 @@ const day6 = () => {
         waysToWin: 0,
       };
     });
-
     return races.map((race) => calculateWaysToWin(race)).reduce((a,b) => a * b.waysToWin, 1);
   };
 
@@ -49,7 +47,6 @@ const day6 = () => {
     const split = input.split('\n').map((line) => 
         Number(line.slice(line.indexOf(':') +1 ).replaceAll(' ',''))
     )
-    split
     const race : race = {
         speed:0,
         time: split[0],
@@ -57,12 +54,12 @@ const day6 = () => {
         waysToWin:0
     }
 
-    console.log(calculateWaysToWin(race))
+    return calculateWaysToWin(race).waysToWin
   }
+  console.log(`Task 1 - ${task1(task1Input)}`)
 
-  console.log(task2(task2Input))
+  console.log(`Task 2 - ${task2(task2Input)}`)
 
-  console.log(task1(task1Input));
 };
 
 day6();
