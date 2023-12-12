@@ -4,7 +4,8 @@ interface galaxys  {
     num:number
 }
 
-const CosmicExpansion = () => {
+const CosmicExpansion2 = () => {
+  const expansin = 1000000
   const taskOneInput = `.......................................#..........................................................#......................................#..
   .....................#................................#.....................................................................................
   ....#.....#...................#...............#....................#.....................#.....................#....................#.......
@@ -152,7 +153,10 @@ let total = 0
   for (let i = 0; i < splitRows.length; i++) {
     expandedRows.push(splitRows[i]);
     if (!splitRows[i].includes("#")) {
+      for (let index = 1; index < expansin; index++) {
       expandedRows.push(splitRows[i]);
+      console.log(`rows ${index}`)
+      }
     }
   }
   let width = expandedRows[0].length;
@@ -167,7 +171,9 @@ let total = 0
     }
     cols.push(test);
     if (!test.includes("#")) {
-      cols.push(test);
+      for (let index = 1; index < expansin; index++) {
+        cols.push(test);
+        }
     }
   }
 let galaxys:galaxys[] = []
@@ -194,7 +200,7 @@ let g = 1
     }
     
   }
-  total
+  console.log(total)
 };
 
-CosmicExpansion();
+CosmicExpansion2();
