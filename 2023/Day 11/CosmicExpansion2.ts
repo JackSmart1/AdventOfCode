@@ -5,7 +5,7 @@ interface galaxys  {
 }
 
 const CosmicExpansion2 = () => {
-  const expansin = 1000000
+  const expansin = 999999
   const taskOneInput = `.......................................#..........................................................#......................................#..
   .....................#................................#.....................................................................................
   ....#.....#...................#...............#....................#.....................#.....................#....................#.......
@@ -149,16 +149,13 @@ const CosmicExpansion2 = () => {
 let total = 0
   let splitRows = taskOneInput.split("\n").map((r) => r.trim().split(""));
   let expandedRows: string[][] = [];
-
+  let numOfExpandedRows:number[]=[]
+  let numOfExpandedCols:number[]=[]
   for (let i = 0; i < splitRows.length; i++) {
     expandedRows.push(splitRows[i]);
     if (!splitRows[i].includes("#")) {
-      for (let index = 1; index < expansin; index++) {
-      expandedRows.push(splitRows[i]);
-      console.log(`rows ${index}`)
-      }
-    }
-  }
+      numOfExpandedRows.push(i) 
+    }}
   let width = expandedRows[0].length;
   let height = expandedRows.length;
   let cols: string[][] = [];
@@ -169,11 +166,10 @@ let total = 0
     for (let i = 0; i < height; i++) {
       test.push(expandedRows[i][index]);
     }
+
     cols.push(test);
     if (!test.includes("#")) {
-      for (let index = 1; index < expansin; index++) {
-        cols.push(test);
-        }
+      numOfExpandedCols.push(index) 
     }
   }
 let galaxys:galaxys[] = []
@@ -190,13 +186,24 @@ let g = 1
         }
     })
   })
-
   for (let i = 0; i < galaxys.length; i++) {
     const first = galaxys[i];
     for (let index = i+1; index < galaxys.length ; index++) {
         const second = galaxys[index];
+        let a = numOfExpandedCols.filter(n=> n>first.row && n < second.row).length
+        let b = 0
+        if(first.place < second.place){
+        b += numOfExpandedRows.filter(n=> n > first.place && n < second.place).length
+
+        }
+        if(second.place < first.place){
+        b += numOfExpandedRows.filter(n=> n > second.place && n < first.place).length
+       }
+        
         total += second.place > first.place ? second.place - first.place : first.place - second.place
-        total += second.row > first.row ? second.row - first.row : first.row - second.row
+        total += first.row > second.row ? first.row - second.row : second.row - first.row
+        total += a * expansin
+        total += b * expansin
     }
     
   }
